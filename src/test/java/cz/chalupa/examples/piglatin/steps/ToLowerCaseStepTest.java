@@ -10,8 +10,12 @@ class ToLowerCaseStepTest {
     void shouldConvertInputToLowerCase() {
         ToLowerCaseStep step = new ToLowerCaseStep();
 
-        assertThat(step.convert("Lower")).isEqualTo("lower");
-        assertThat(step.convert("CASE")).isEqualTo("case");
-        assertThat(step.convert("sTeP")).isEqualTo("step");
+        assertThat(step.convert(input("Lower")).getValue()).isEqualTo("lower");
+        assertThat(step.convert(input("CASE")).getValue()).isEqualTo("case");
+        assertThat(step.convert(input("sTeP")).getValue()).isEqualTo("step");
+    }
+
+    private StepInput input(String input) {
+        return StepInput.builder().value(input).metadata(StepInput.Metadata.builder().build()).build();
     }
 }

@@ -15,13 +15,13 @@ public class ConversionStep implements Step {
     private static final String CONSONANT_SUFFIX = "ay";
 
     @Override
-    public String convert(@NonNull String input) {
-        if (input.isEmpty() || input.endsWith("way")) {
+    public StepInput convert(@NonNull StepInput input) {
+        if (input.getValue().isEmpty() || input.getValue().endsWith("way")) {
             return input;
         }
-
-        char first = input.charAt(0);
-        return VOWELS.stream().anyMatch(v -> v == first) ? convertVowel(input) : convertConsonant(input);
+        char first = input.getValue().charAt(0);
+        String converted = VOWELS.stream().anyMatch(v -> v == first) ? convertVowel(input.getValue()) : convertConsonant(input.getValue());
+        return StepInput.builder().value(converted).metadata(input.getMetadata()).build();
     }
 
     private String convertVowel(String input) {

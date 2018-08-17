@@ -10,19 +10,23 @@ class ConversionStepTest {
 
     @Test
     void shouldKeepWordEndingWithWayAsIs() {
-        assertThat(STEP.convert("stairway")).isEqualTo("stairway");
-        assertThat(STEP.convert("airway")).isEqualTo("airway");
+        assertThat(STEP.convert(input("stairway")).getValue()).isEqualTo("stairway");
+        assertThat(STEP.convert(input("airway")).getValue()).isEqualTo("airway");
     }
 
     @Test
     void shouldAddWaySuffixToWordStartingWithVowel() {
-        assertThat(STEP.convert("apple")).isEqualTo("appleway");
-        assertThat(STEP.convert("orange")).isEqualTo("orangeway");
+        assertThat(STEP.convert(input("apple")).getValue()).isEqualTo("appleway");
+        assertThat(STEP.convert(input("orange")).getValue()).isEqualTo("orangeway");
     }
 
     @Test
     void shouldMoveFirstLetterToEndAddAySuffixToWordStartingWithConsonant() {
-        assertThat(STEP.convert("hello")).isEqualTo("ellohay");
-        assertThat(STEP.convert("beach")).isEqualTo("eachbay");
+        assertThat(STEP.convert(input("hello")).getValue()).isEqualTo("ellohay");
+        assertThat(STEP.convert(input("beach")).getValue()).isEqualTo("eachbay");
+    }
+
+    private StepInput input(String input) {
+        return StepInput.builder().value(input).metadata(StepInput.Metadata.builder().build()).build();
     }
 }

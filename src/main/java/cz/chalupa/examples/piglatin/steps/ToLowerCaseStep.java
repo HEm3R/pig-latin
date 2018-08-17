@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class ToLowerCaseStep implements Step {
 
     @Override
-    public String convert(@NonNull String input) {
-        return input.toLowerCase();
+    public StepInput convert(@NonNull StepInput input) {
+        return StepInput.builder().value(input.getValue().toLowerCase()).metadata(input.getMetadata()).build();
     }
 }
