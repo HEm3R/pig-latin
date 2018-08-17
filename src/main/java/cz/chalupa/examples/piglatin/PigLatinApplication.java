@@ -1,17 +1,21 @@
 package cz.chalupa.examples.piglatin;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+import cz.chalupa.examples.piglatin.conversion.ConversionContext;
+import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@AllArgsConstructor
 @SpringBootApplication
 public class PigLatinApplication implements CommandLineRunner {
 
-    public static void main(String[] args) {
-        SpringApplication.run(PigLatinApplication.class, args);
-    }
+    @NonNull private ConversionContext conversionContext;
 
     @Override
     public void run(String... args) {
@@ -32,6 +36,10 @@ public class PigLatinApplication implements CommandLineRunner {
     }
 
     private String convert(String input) {
-        return input; // TODO: processing flow
+        return Pattern.compile("\\s").splitAsStream(input).map(conversionContext::convert).collect(Collectors.joining(" "));
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(PigLatinApplication.class, args);
     }
 }
