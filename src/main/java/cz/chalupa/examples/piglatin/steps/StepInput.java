@@ -1,6 +1,9 @@
 package cz.chalupa.examples.piglatin.steps;
 
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -18,5 +21,6 @@ public class StepInput {
     public static class Metadata {
 
         private Set<Long> upperCasePositions;
+        private TreeMap<Long, Character> punctuationsFromEnd;
     }
 }
